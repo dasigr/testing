@@ -1,4 +1,5 @@
 <?php
+
 require 'vendor/autoload.php';
 
 class SingleTest extends BrowserStackTest {
@@ -16,4 +17,3 @@ class SingleTest extends BrowserStackTest {
     }
 
 }
-?>

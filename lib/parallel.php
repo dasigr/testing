@@ -19,5 +19,3 @@ foreach ($procs as $key => $value) {
     }
     pclose($value);
 }
-
-?>

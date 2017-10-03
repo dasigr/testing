@@ -37,4 +37,3 @@ class BrowserStackTest extends PHPUnit_Framework_TestCase
         if(self::$bs_local) self::$bs_local->stop();
     }
 }
-?>
