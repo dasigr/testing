@@ -1,4 +1,8 @@
 {
+  "name": "trueapex/testframework",
+  "description": "Site test framefork.",
+  "license": "MIT",
+  "type": "project",
   "require": {
     "browserstack/browserstack-local": "dev-master",
     "phpunit/phpunit-selenium": "*",
