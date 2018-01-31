@@ -19,10 +19,10 @@
 class TrueApexTestCase extends PHPUnit_Framework_TestCase {
 
   /** @var RemoteWebDriver $driver */
-  protected $driver;
+  protected static $driver;
 
   protected function setUp() {
-    $this->driver = RemoteWebDriver::create(
+    self::$driver = RemoteWebDriver::create(
       SELENIUM_SERVER,
       array(
         WebDriverCapabilityType::BROWSER_NAME => WebDriverBrowserType::FIREFOX,
@@ -32,7 +32,7 @@ class TrueApexTestCase extends PHPUnit_Framework_TestCase {
   }
 
   protected function tearDown() {
-    $this->driver->quit();
+    self::$driver->quit();
   }
 
   /**
@@ -45,22 +45,22 @@ class TrueApexTestCase extends PHPUnit_Framework_TestCase {
     $password = $account['password'];
 
     // Open page and wait for 2 seconds to load.
-    $this->driver->get(SITE_URL . '/user');
+    self::$driver->get(SITE_URL . '/user');
     sleep(3);
 
     // Get window handles.
-    $window_handles = $this->driver->getWindowHandles();
+    $window_handles = self::$driver->getWindowHandles();
 
     // Confirm authentication.
     if (isset($window_handles[1]) && $window_handles[1] == 11) {
-      $this->driver->switchTo()->alert()->accept();
+      self::$driver->switchTo()->alert()->accept();
     }
 
     // Maximize screen.
-    $this->driver->manage()->window()->maximize();
+    self::$driver->manage()->window()->maximize();
 
     // Wait for page to load.
-//    $this->driver->wait(20, 500)->until(function($driver) {
+//    self::$driver->wait(20, 500)->until(function($driver) {
 //      $elements = $driver->findElement(WebDriverBy::cssSelector('h2.page-title'));
 //      return count($elements) > 0;
 //    });
@@ -69,19 +69,19 @@ class TrueApexTestCase extends PHPUnit_Framework_TestCase {
 //    $this->assertEquals('User account', $this->driver->findElement(WebDriverBy::cssSelector('h2.page-title'))->getText());
 
     // Login.
-    $this->driver->findElement(WebDriverBy::cssSelector('form#user-login input[name="name"]'))->sendKeys($username);
-    $this->driver->findElement(WebDriverBy::cssSelector('form#user-login input[name="pass"]'))->sendKeys($password);
-    $this->driver->findElement(WebDriverBy::cssSelector('form#user-login input[value="Log in"]'))->click();
+    self::$driver->findElement(WebDriverBy::cssSelector('form#user-login input[name="name"]'))->sendKeys($username);
+    self::$driver->findElement(WebDriverBy::cssSelector('form#user-login input[name="pass"]'))->sendKeys($password);
+    self::$driver->findElement(WebDriverBy::cssSelector('form#user-login input[value="Log in"]'))->click();
     sleep(5);
 
     // Wait for page to load.
-//    $this->driver->wait(20, 500)->until(function($driver) {
+//    self::$driver->wait(20, 500)->until(function($driver) {
 //      $elements = $driver->findElement(WebDriverBy::cssSelector('h2.page-title'));
 //      return count($elements) > 0;
 //    });
 
     // Verify that you're in logged in.
-    $this->assertContains(SITE_NAME, $this->driver->getTitle());
+    $this->assertContains(SITE_NAME, self::$driver->getTitle());
   }
 
   /**
