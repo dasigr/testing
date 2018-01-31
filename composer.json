@@ -1,20 +1,15 @@
 {
-  "name": "trueapex/testframework",
-  "description": "Site test framefork.",
+  "name": "trueapex/webtest",
+  "description": "Site test framework.",
   "license": "MIT",
   "type": "project",
-  "require": {
+  "require-dev": {
     "browserstack/browserstack-local": "dev-master",
     "phpunit/phpunit-selenium": "*",
     "facebook/webdriver": "dev-master"
   },
-  "scripts": {
-    "test": "composer single && composer local && composer parallel",
-    "single": "vendor/bin/phpunit tests/single_test.php",
-    "local": "CONFIG_FILE=config/local.conf.json vendor/bin/phpunit tests/local_test.php",
-    "parallel": "CONFIG_FILE=config/parallel.conf.json /usr/bin/env php lib/parallel.php"
-  },
   "autoload": {
     "classmap": ["lib/"]
-  }
+  },
+  "minimum-stability": "stable"
 }
